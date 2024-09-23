@@ -38,7 +38,7 @@ jobs:
             cd /home/ubuntu/shop-backend || exit
 
             # Pull the latest code from your remote GitHub repository
-            git pull https://github.com/your-username/your-repository.git main
+            git pull https://github.com/SarojThakur96/fresh-krate-backend.git main
 
             # Install dependencies
             npm install
