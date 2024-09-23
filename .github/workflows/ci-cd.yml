@@ -49,9 +49,14 @@ jobs:
                 git pull origin main
               fi
            
-            # Verify installation
-              node -v
-              npm -v  
+           # Skip Node.js installation, assuming it's already installed manually
+              if command -v npm &> /dev/null; then
+                echo "Node.js and npm are already installed."
+              else
+                # Install Node.js 20.x (this step should ideally be unnecessary since you mentioned it's working manually)
+                curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+                sudo apt-get install -y nodejs
+              fi
 
             # Install dependencies
             npm install
