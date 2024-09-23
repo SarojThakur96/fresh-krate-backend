@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the latest code from the repository
+      # Checkout the latest code from the repository in the GitHub Actions runner
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -34,10 +34,11 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-            cd /home/ubuntu/shop-backend  # Ensure the correct project directory
+            # Navigate to your project directory
+            cd /home/ubuntu/shop-backend || exit
 
-            # Pull the latest code from GitHub
-            git pull origin main
+            # Pull the latest code from your remote GitHub repository
+            git pull https://github.com/your-username/your-repository.git main
 
             # Install dependencies
             npm install
@@ -49,7 +50,7 @@ jobs:
             docker stop shop-backend || true
             docker rm shop-backend || true
 
-            # Run the new Docker container, passing environment variables from GitHub Secrets
+            # Run the new Docker container with environment variables passed from GitHub Secrets
             docker run -d -p ${{ secrets.PORT }}:${{ secrets.PORT }} \
               -e RAZORPAY_KEY_ID=${{ secrets.RAZORPAY_KEY_ID }} \
               -e RAZORPAY_KEY_SECRET=${{ secrets.RAZORPAY_KEY_SECRET }} \
