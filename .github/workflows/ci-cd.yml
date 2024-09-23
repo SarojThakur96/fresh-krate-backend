@@ -49,6 +49,9 @@ jobs:
                 git pull origin main
               fi
            
+            # Verify installation
+              node -v
+              npm -v  
 
             # Install dependencies
             npm install
