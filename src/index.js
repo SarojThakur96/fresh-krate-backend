@@ -17,7 +17,7 @@ dotenv.config({
 //     });
 //   })
 //   .catch((err) => console.log("firebase  connection failed!!", err));
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App is running on Port ${port}`);
 });
